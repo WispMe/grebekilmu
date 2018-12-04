@@ -2,6 +2,21 @@
 
 include("koneksi.php");
 require_once("auth.php");
+
+if(isset($_GET['id'])) {
+    $sql = "UPDATE pesanan SET status='1' WHERE id='".$_GET['id']."'";
+    $query = mysqli_query($con, $sql);
+    
+    // apakah query update berhasil?
+    if( $query ) {
+        // kalau berhasil alihkan ke halaman list-siswa.php
+        header('Location: form_peminjaman.php');
+    } else {
+        // kalau gagal tampilkan pesan
+        die("Gagal menyimpan perubahan...");
+    }
+}
+
 ?>
 
 
@@ -33,11 +48,14 @@ require_once("auth.php");
         </div>
     </nav>
     <?php 
-        $sql = 'SELECT pesanan.id, pesanan.order_nama, pesanan.tanggal, pesanan.status, buku.nama_buku FROM pesanan INNER JOIN buku ON pesanan.id_buku = buku.id';
+        $sql = 'SELECT pesanan.id, pesanan.order_nama, pesanan.tanggal, pesanan.status, buku.nama_buku FROM pesanan JOIN buku ON pesanan.id_buku = buku.id';
         $result = mysqli_query($con, $sql);
      ?>
     <div class="container" style="padding:83px;">
         <div class="table-responsive">
+            <p>Catatan:</p>
+            <p>Pesanan dikonfirmasi (status = 1)</p>
+            <p>Pesanan belum dikonfirmasi (status = 0)</p>
             <table class="table">
                 <thead>
                     <tr>
@@ -46,6 +64,7 @@ require_once("auth.php");
                         <th>Tanggal</th>
                         <th>Nama Buku</th>
                         <th>Status</th>
+                        <th>Tindakan</th>
                     </tr>
                 </thead>
                 <?php while($product = mysqli_fetch_object($result)) { ?> 
@@ -56,6 +75,7 @@ require_once("auth.php");
                         <td> <?php echo $product->tanggal; ?> </td>
                         <td> <?php echo $product->nama_buku; ?> </td>
                         <td> <?php echo $product->status; ?> </td>
+                        <td><a href="form_peminjaman.php?id=<?php echo $product->id; ?>" onclick="return confirm('Are you sure?')" >Terima Pinjaman</a> </td>
                     </tr>
                 <?php } ?>
                 </tbody>

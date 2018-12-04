@@ -5,6 +5,6 @@
 </head>
 <body>
 <h3>Pesanan Sukses!</h3>
-<a href="home.php">Kembali ke halaman utama</a>
+<a href="masuk.php">Kembali ke halaman utama</a>
 </body>
 </html>

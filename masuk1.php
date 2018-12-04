@@ -7,6 +7,9 @@ $namabelakang = $_SESSION["user"]["namabelakang"];
 $namadepan = $_SESSION["user"]["namadepan"];
 $nama = $namabelakang . ' ' . $namadepan;
 
+if(isset($_GET["id"]) || isset($_GET["index"])){
+    header('Location: masuk.php');
+    } 
 
 ?>
 
@@ -40,97 +43,100 @@ $nama = $namabelakang . ' ' . $namadepan;
             <div class="swiper-button-next"></div>
         </div>
     </div>
+    <?php 
+    $sql = 'SELECT * FROM buku';
+    $result = mysqli_query($con, $sql);
+    ?>
     <div style="padding:23px;background-color:#f8f8f8;">
         <div class="container">
-            <?php 
-                require 'koneksi.php';
-                $sql = 'SELECT * FROM buku';
-                $result = mysqli_query($con, $sql);
-            ?>
             <h1>Daftar Buku</h1>
             <div class="table-responsive">
-                <table class="table" id="t01">
+                <table class="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nama_buku</th>
-                            <th>Tahun_terbit</th>
+                            <th>Id</th>
+                            <th>Nama Buku</th>
                             <th>Penerbit</th>
+                            <th>Tahun</th>
                             <th>Jenis</th>
+                            <th>Kuantitas</th>
+                            <th>Tindakan</th>
                         </tr>
                     </thead>
+                    <?php while($product = mysqli_fetch_object($result)) { ?> 
                     <tbody>
-                        <?php while($product = mysqli_fetch_object($result)) { ?> 
                         <tr>
                             <td> <?php echo $product->id; ?> </td>
                             <td> <?php echo $product->nama_buku; ?> </td>
-                            <td> <?php echo $product->tahun_terbit; ?> </td>
                             <td> <?php echo $product->penerbit; ?> </td>
+                            <td> <?php echo $product->tahun_terbit; ?> </td>
                             <td> <?php echo $product->jenis; ?> </td>
-                            <td><a name='pinjam' href="masuk1.php?id= <?php echo $product->id; ?> &action=add">Pinjam</a></td>
+                            <td> <?php echo $product->quantity; ?> </td>
+                            <td> <a name='pinjam' href="masuk.php?id=<?php echo $product->id; ?>&action=add">Pinjam</a> </td>
                         </tr>
-                        <?php } ?>
+                        <?php 
+                        } 
+                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
         <?php 
-        // Start the session
-        require 'koneksi.php';
-        require 'item.php';
+            // Start the session
+            require 'koneksi.php';
+            require 'item.php';
 
-        if(isset($_GET['id']) && !isset($_POST['update']))  { 
-            $sql = "SELECT * FROM buku WHERE id=".$_GET['id'];
-            $result = mysqli_query($con, $sql);
-            $product = mysqli_fetch_object($result); 
-            $item = new Item();
-            $item->id = $product->id;
-            $item->nama_buku = $product->nama_buku;
-            $item->penerbit = $product->penerbit;
-            $item->tahun_terbit = $product->tahun_terbit;
-            $item->jenis = $product->jenis;
-            $iteminstock = $product->quantity;
-            $item->quantity = 1;
-            // Check product is existing in cart
-            $index = -1;
-            $cart = unserialize(serialize($_SESSION['cart'])); // set $cart as an array, unserialize() converts a string into array
-            for($i=0; $i<count($cart);$i++)
-                if ($cart[$i]->id == $_GET['id']){
-                    $index = $i;
-                    break;
-                }
-                if($index == -1) 
-                    $_SESSION['cart'][] = $item; // $_SESSION['cart']: set $cart as session variable
-                else {
-                    
-                    if (($cart[$index]->quantity) < $iteminstock)
-                         $cart[$index]->quantity ++;
-                         $_SESSION['cart'] = $cart;
-                }
-        }
-        // Delete product in cart
-        if(isset($_GET['index']) && !isset($_POST['update'])) {
-            $cart = unserialize(serialize($_SESSION['cart']));
-            unset($cart[$_GET['index']]);
-            $cart = array_values($cart);
-            $_SESSION['cart'] = $cart;
-        }
-        // Update quantity in cart
-        if(isset($_POST['update'])) {
-          $arrQuantity = $_POST['quantity'];
-          $cart = unserialize(serialize($_SESSION['cart']));
-          for($i=0; $i<count($cart);$i++) {
-             $cart[$i]->quantity = $arrQuantity[$i];
-          }
-          $_SESSION['cart'] = $cart;
-        }
+            if(isset($_GET['id']) && !isset($_POST['update']))  { 
+                $sql = "SELECT * FROM buku WHERE id=".$_GET['id'];
+                $result = mysqli_query($con, $sql);
+                $product = mysqli_fetch_object($result); 
+                $item = new Item();
+                $item->id = $product->id;
+                $item->nama_buku = $product->nama_buku;
+                $item->penerbit = $product->penerbit;
+                $item->tahun_terbit = $product->tahun_terbit;
+                $item->jenis = $product->jenis;
+                $iteminstock = $product->quantity;
+                $item->quantity = 1;
+                // Check product is existing in cart
+                $index = -1;
+                $cart = unserialize(serialize($_SESSION['cart'])); // set $cart as an array, unserialize() converts a string into array
+                for($i=0; $i<count($cart);$i++)
+                    if ($cart[$i]->id == $_GET['id']){
+                        $index = $i;
+                        break;
+                    }
+                    if($index == -1) 
+                        $_SESSION['cart'][] = $item; // $_SESSION['cart']: set $cart as session variable
+                    else {
+                        
+                        if (($cart[$index]->quantity) < $iteminstock)
+                             $cart[$index]->quantity ++;
+                             $_SESSION['cart'] = $cart;
+                    }
+            }
+            // Delete product in cart
+            if(isset($_GET['index']) && !isset($_POST['update'])) {
+                $cart = unserialize(serialize($_SESSION['cart']));
+                unset($cart[$_GET['index']]);
+                $cart = array_values($cart);
+                $_SESSION['cart'] = $cart;
+            }
+            // Update quantity in cart
+            if(isset($_POST['update'])) {
+              $arrQuantity = $_POST['quantity'];
+              $cart = unserialize(serialize($_SESSION['cart']));
+              for($i=0; $i<count($cart);$i++) {
+                 $cart[$i]->quantity = $arrQuantity[$i];
+              }
+              $_SESSION['cart'] = $cart;
+            }
         ?>
-        
         <div class="container">
             <h1>Keranjang</h1>
             <div class="table-responsive">
                 <form  action='' method="POST">
-                <table class="table" id ="t01">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Option</th>
@@ -139,59 +145,33 @@ $nama = $namabelakang . ' ' . $namadepan;
                             <th>Penerbit</th>
                         </tr>
                     </thead>
-                    <tbody>
                     <?php 
-                        //  if (isset($_POST['pinjam'])) {
-                        # code...
-                        $cart = unserialize(serialize($_SESSION['cart']));
-                        $s = 0;
-                        $index = 0;
-                        for($i=0; $i<count($cart); $i++){
-                     ?> 
+                      //  if(isset($_SESSION['cart']) {
+                              # code...
+                            if(isset($_SESSION['cart'])) {
+                            $cart = unserialize(serialize($_SESSION['cart']));
+                            $s = 0;
+                            $index = 0;
+                            for($i=0; $i<count($cart); $i++){
+                    ?> 
+                    <tbody>
                         <tr>
-                            <td><a href="masuk1.php?index=<?php echo $index; ?>" onclick="return confirm('Are you sure?')" >Delete</a> </td>
+                            <td><a href="masuk.php?index=<?php echo $index; ?>" onclick="return confirm('Are you sure?')" >Delete</a> </td>
                             <td> <?php echo $cart[$i]->id; ?> </td>
                             <td> <?php echo $cart[$i]->nama_buku; ?> </td>
                             <td> <?php echo $cart[$i]->penerbit; ?> </td>
                         </tr>
                     <?php 
-                            $index++;
-                        } 
+                        $index++;
+                    } }
                     ?>
                     </tbody>
                 </table>
-                <input class="form-control" type="submit" name="pesan" style="background-color:rgb(147,147,147);" value="Pesan"></div>
+                <input class="form-control" type="submit" name="pesan" style="background-color:rgb(147,147,147);" value="Pesan">
+            </form>
+            <br>
             </div>
         </div>
-    </form>
-    <?php 
-    if(isset($_GET["id"]) || isset($_GET["index"])){
-     header('Location: masuk1.php');
-    } 
-
-    ?>
-
-<?php  
-
-    if (isset($_POST['pesan'])) {
-        # code...
-        $cart = unserialize(serialize($_SESSION['cart']));
-        for($i=0; $i<count($cart);$i++) {
-        $sql = "INSERT INTO pesanan (order_nama, id_buku, tanggal, status) VALUES ('$nama', '".$cart[$i]->id."', '".date('Y-m-d')."', '0')";
-        $query = mysqli_query($con, $sql);
-        if( $query ) {
-            // kalau berhasil alihkan ke halaman list-siswa.php
-            header('Location: sukses.php');
-        } else {
-            // kalau gagal tampilkan pesan
-            die("Gagal menyimpan perubahan...");
-        }
-
-        unset($_SESSION['cart']);
-        }
-    }
-
-?>
     </div>
     <div class="social-icons"><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-youtube"></i></a></div>
     <nav class="navbar navbar-light navbar-expand-md fixed-top visible"
@@ -200,8 +180,7 @@ $nama = $namabelakang . ' ' . $namadepan;
             <div
                 class="collapse navbar-collapse justify-content-end" id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link" style="color:#ffffff;padding:14px;"><?php echo $_SESSION["user"]["email"] ?></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="masuk1.html" style="color:#ffffff;padding:14px;">Beranda</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" style="color:#ffffff;padding:14px;"><?php echo $_SESSION["user"]["email"] ?></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="profil.html" style="color:#ffffff;padding:14px;">Profil</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;padding:14px;">Ajuan</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="logout.php" style="color:#ffffff;"><button class="btn btn-primary" type="button">Keluar</button></a></li>
@@ -217,3 +196,21 @@ $nama = $namabelakang . ' ' . $namadepan;
 </body>
 
 </html>
+<?php
+    if (isset($_POST['pesan'])) {
+        # code...
+        $cart = unserialize(serialize($_SESSION['cart']));
+        for($i=0; $i<count($cart);$i++) {
+        $sql = "INSERT INTO pesanan (order_nama, id_buku, tanggal, status) VALUES ('$nama', '".$cart[$i]->id."', '".date('Y-m-d')."', '0')";
+        $query = mysqli_query($con, $sql);
+        if($query) {
+            // kalau berhasil alihkan ke halaman list-siswa.php
+            header('Location: sukses.php');
+        } else {
+            // kalau gagal tampilkan pesan
+            die("Gagal menyimpan perubahan...");
+            }
+        unset($_SESSION['cart']);
+        }
+    } 
+?>

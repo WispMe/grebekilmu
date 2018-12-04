@@ -10,11 +10,12 @@ if(isset($_POST['submit'])){
     // enkripsi password
     $jenis = filter_input(INPUT_POST, 'jenis', FILTER_SANITIZE_STRING);
     $nohp = filter_input(INPUT_POST, 'nohp', FILTER_SANITIZE_STRING);
+    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_STRING);
 
 
     // menyiapkan query
-    $sql = "INSERT INTO buku (nama_buku, penerbit, tahun_terbit, jenis) 
-            VALUES (:nama_buku, :penerbit, :tahun_terbit, :jenis)";
+    $sql = "INSERT INTO buku (nama_buku, penerbit, tahun_terbit, jenis, quantity) 
+            VALUES (:nama_buku, :penerbit, :tahun_terbit, :jenis, :quantity)";
     $stmt = $db->prepare($sql);
 
     // bind parameter ke query
@@ -22,7 +23,8 @@ if(isset($_POST['submit'])){
         ":nama_buku" => $nama_buku,
         ":penerbit" => $penerbit,
         ":jenis" => $jenis,
-        ":tahun_terbit" => $tahun_terbit
+        ":tahun_terbit" => $tahun_terbit,
+        ":quantity" => $quantity
     );
 
     // eksekusi query untuk menyimpan ke database

@@ -1,4 +1,20 @@
-<?php include("koneksi.php"); ?>
+<?php
+include("koneksi.php");
+require_once("auth.php"); 
+
+if(isset($_GET['id'])) {
+    $sql = "DELETE FROM member WHERE id='".$_GET['id']."'";
+    $query = mysqli_query($con, $sql);
+    if( $query ) {
+    // kalau berhasil alihkan ke halaman list-siswa.php
+    header('Location: user_admin.php');
+    } else {
+    // kalau gagal tampilkan pesan
+    die("Gagal menyimpan perubahan...");
+    }
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -57,7 +73,7 @@
                         echo "<td>".$member['nohp']."</td>";
                         echo "<td>";
                         echo "<a href='edit_user.php?id=".$member['ID']."'>Edit</a> | ";
-                        echo "<a href='hapus.php?id=".$member['ID']."'>Hapus</a>";
+                        echo "<a href='user_admin.php?id=".$member['ID']."' onclick='return confirm('Are you sure?')'>Hapus</a>";
                         echo "</td>";
 
                         echo "</tr>";

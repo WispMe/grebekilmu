@@ -2,6 +2,20 @@
 
 include("koneksi.php");
 require_once("auth.php");
+
+    // Delete product in cart
+if(isset($_GET['id'])) {
+    $sql = "DELETE FROM buku WHERE id='".$_GET['id']."'";
+    $query = mysqli_query($con, $sql);
+    if( $query ) {
+    // kalau berhasil alihkan ke halaman list-siswa.php
+    header('Location: buku_admin.php');
+    } else {
+    // kalau gagal tampilkan pesan
+    die("Gagal menyimpan perubahan...");
+    }
+}
+
 ?>
 
 
@@ -59,6 +73,7 @@ require_once("auth.php");
                         <td> <?php echo $product->tahun_terbit; ?> </td>
                         <td> <?php echo $product->jenis; ?> </td>
                         <td> <?php echo $product->quantity; ?> </td>
+                        <td><a href="buku_admin.php?id=<?php echo $product->id; ?>" onclick="return confirm('Are you sure?')" >Delete</a> </td>
                     </tr>
                 <?php } ?>
                 </tbody>
@@ -72,6 +87,7 @@ require_once("auth.php");
             <input class="form-control" type="text" placeholder="Penerbit" name="penerbit">
             <input class="form-control" type="text" placeholder="Tahun Terbit" name="tahun_terbit">
             <input class="form-control" type="text" placeholder="Jenis" name="jenis">
+            <input class="form-control" type="text" placeholder="Quantity" name="quantity">
             <button class="btn btn-primary" role="button" type="submit" name="submit" href="#">Simpan</button>
         </form>
     </div>

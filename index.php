@@ -98,7 +98,7 @@ if(isset($_POST['login'])){
             <div
                 class="collapse navbar-collapse justify-content-end" id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html" style="color:#ffffff;">Beranda</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.php" style="color:#ffffff;">Beranda</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="tentang.html" style="color:#ffffff;">Tentang</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="kontak.html" style="color:#ffffff;">Hubungi Kami</a></li>
                 </ul>
@@ -211,52 +211,7 @@ if(isset($_POST['login'])){
             </div>
         </div>
     </div>
-    <div data-aos="fade" data-aos-delay="50" class="team-grid" style="background-color:rgb(223,231,241);">
-        <div class="container" style="background-color:#dfe7f1;">
-            <div class="intro">
-                <h2 class="text-center">Mentor</h2>
-                <p class="text-center">Beberapa mentor di GrebekIlmu merupakan mahasiswa angkatan 2016 sehingga dapat memberikan pengalaman secara langsung baik tentang bidikmisi, SBMPTN, maupun bagaimana dunia perkuliahan.</p>
-            </div>
-            <div class="row people">
-                <div class="col-md-4 col-lg-3 item">
-                    <div class="box" style="background-image:url(assets/img/1.jpg)">
-                        <div class="cover">
-                            <h3 class="name">Ben Johnson</h3>
-                            <p class="title">Telkom University</p>
-                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-3 item">
-                    <div class="box" style="background-image:url(assets/img/2.jpg)">
-                        <div class="cover">
-                            <h3 class="name">Emily Clark</h3>
-                            <p class="title">UNDIP</p>
-                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-3 item">
-                    <div class="box" style="background-image:url(assets/img/3.jpg)">
-                        <div class="cover">
-                            <h3 class="name">Carl Kent</h3>
-                            <p class="title">ITB</p>
-                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-3 item">
-                    <div class="box" style="background-image:url(assets/img/4.jpg)">
-                        <div class="cover">
-                            <h3 class="name">Felicia Adams</h3>
-                            <p class="title">UGM</p>
-                            <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <div class="social-icons"><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-youtube"></i></a></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>

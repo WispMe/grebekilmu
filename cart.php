@@ -11,6 +11,8 @@ if(isset($_GET["id"]) || isset($_GET["index"])){
     header('Location: masuk.php');
     } 
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -43,43 +45,7 @@ if(isset($_GET["id"]) || isset($_GET["index"])){
             <div class="swiper-button-next"></div>
         </div>
     </div>
-    <?php 
-    $sql = 'SELECT * FROM buku';
-    $result = mysqli_query($con, $sql);
-    ?>
     <div style="padding:23px;background-color:#f8f8f8;">
-        <div class="container">
-            <h1>Daftar Buku</h1>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nama Buku</th>
-                            <th>Penerbit</th>
-                            <th>Tahun</th>
-                            <th>Jenis</th>
-                            <th>Kuantitas</th>
-                            <th>Tindakan</th>
-                        </tr>
-                    </thead>
-                    <?php while($product = mysqli_fetch_object($result)) { ?> 
-                    <tbody>
-                        <tr>
-                            <td> <?php echo $product->id; ?> </td>
-                            <td> <?php echo $product->nama_buku; ?> </td>
-                            <td> <?php echo $product->penerbit; ?> </td>
-                            <td> <?php echo $product->tahun_terbit; ?> </td>
-                            <td> <?php echo $product->jenis; ?> </td>
-                            <td> <?php echo $product->quantity; ?> </td>
-                            <td> <a name='pinjam' href="masuk.php?id=<?php echo $product->id; ?>&action=add">Pinjam</a> </td>
-                        </tr>
-                        <?php 
-                        } 
-                        ?>
-                    </tbody>
-                </table>
-            </div>
         </div>
         <?php 
             // Start the session
@@ -132,17 +98,73 @@ if(isset($_GET["id"]) || isset($_GET["index"])){
               $_SESSION['cart'] = $cart;
             }
         ?>
+        <div class="container">
+            <h1>Daftar Ajuan</h1>
+            <div class="table-responsive">
+                <form  action='' method="POST">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th>Id</th>
+                            <th>Nama Buku</th>
+                            <th>Penerbit</th>
+                        </tr>
+                    </thead>
+                    <?php 
+                      //  if(isset($_SESSION['cart']) {
+                              # code...
+                            if(isset($_SESSION['cart'])) {
+                            $cart = unserialize(serialize($_SESSION['cart']));
+                            $s = 0;
+                            $index = 0;
+                            for($i=0; $i<count($cart); $i++){
+                    ?> 
+                    <tbody>
+                        <tr>
+                            <td><a href="masuk.php?index=<?php echo $index; ?>" onclick="return confirm('Are you sure?')" >Delete</a> </td>
+                            <td> <?php echo $cart[$i]->id; ?> </td>
+                            <td> <?php echo $cart[$i]->nama_buku; ?> </td>
+                            <td> <?php echo $cart[$i]->penerbit; ?> </td>
+                        </tr>
+                    <?php 
+                        $index++;
+                    } }
+                    if (isset($_POST['pesan'])) {
+                            # code...
+                            $cart = unserialize(serialize($_SESSION['cart']));
+                            for($i=0; $i<count($cart);$i++) {
+                            $sql = "INSERT INTO pesanan (order_nama, id_buku, tanggal, status) VALUES ('$nama', '".$cart[$i]->id."', '".date('Y-m-d')."', '0')";
+                            $query = mysqli_query($con, $sql);
+                            if($query) {
+                                // kalau berhasil alihkan ke halaman list-siswa.php
+                                header('Location: sukses.php');
+                            } else {
+                                // kalau gagal tampilkan pesan
+                                die("Gagal menyimpan perubahan...");
+                                }
+                            unset($_SESSION['cart']);
+                            }
+                        } 
+                    ?>
+                    </tbody>
+                </table>
+                <input class="form-control" type="submit" name="pesan" style="background-color:rgb(147,147,147);" value="Pesan">
+            </form>
+            <br>
+            </div>
+        </div>
     </div>
     <div class="social-icons"><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-youtube"></i></a></div>
     <nav class="navbar navbar-light navbar-expand-md fixed-top visible"
         data-aos="flip-up" data-aos-delay="900" style="background-color:#72aeda;color:rgb(205,207,208);">
-        <div class="container-fluid"><a class="navbar-brand" href="#" style="color:#ffffff;">Grebek<strong>Ilmu</strong></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-brand" href="masuk.php" style="color:#ffffff;">Grebek<strong>Ilmu</strong></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse justify-content-end" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link active" style="color:#ffffff;padding:14px;"><?php echo $_SESSION["user"]["email"] ?></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="profil.html" style="color:#ffffff;padding:14px;">Profil</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="cart.php" style="color:#ffffff;padding:14px;">Ajuan</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;padding:14px;">Ajuan</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="logout.php" style="color:#ffffff;"><button class="btn btn-primary" type="button">Keluar</button></a></li>
                 </ul>
         </div>
@@ -156,21 +178,3 @@ if(isset($_GET["id"]) || isset($_GET["index"])){
 </body>
 
 </html>
-<?php
-    if (isset($_POST['pesan'])) {
-        # code...
-        $cart = unserialize(serialize($_SESSION['cart']));
-        for($i=0; $i<count($cart);$i++) {
-        $sql = "INSERT INTO pesanan (order_nama, id_buku, tanggal, status) VALUES ('$nama', '".$cart[$i]->id."', '".date('Y-m-d')."', '0')";
-        $query = mysqli_query($con, $sql);
-        if($query) {
-            // kalau berhasil alihkan ke halaman list-siswa.php
-            header('Location: sukses.php');
-        } else {
-            // kalau gagal tampilkan pesan
-            die("Gagal menyimpan perubahan...");
-            }
-        unset($_SESSION['cart']);
-        }
-    } 
-?>

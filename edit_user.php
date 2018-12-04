@@ -56,7 +56,7 @@ if( mysqli_num_rows($query) < 1 ){
         <form action="proses-edit.php" method="post">
             <h2 class="sr-only">Login Form</h2>
             <p>edit user</p>
-            <input type="text" name="id" value="<?php echo $member['ID'] ?>" />
+            <input type="hidden" name="id" value="<?php echo $member['ID'] ?>" />
             <div class="form-group"><input class="form-control" type="text" name="namabelakang" placeholder="Nama Belakang" style="height:41px;margin:11px;" value="<?php echo $member['namabelakang'] ?>"></div>
             <div class="form-group">
                 <input class="form-control" type="text" name="namadepan" placeholder="Nama Depan" style="margin:13px;" value="<?php echo $member['namadepan'] ?>">
