@@ -141,7 +141,8 @@ if(isset($_GET["id"]) || isset($_GET["index"])){
                 class="collapse navbar-collapse justify-content-end" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link active" style="color:#ffffff;padding:14px;"><?php echo $_SESSION["user"]["email"] ?></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="profil.html" style="color:#ffffff;padding:14px;">Profil</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="profil.php" style="color:#ffffff;padding:14px;">Profil</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="soal.php" style="color:#ffffff;padding:14px;">Soal</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="cart.php" style="color:#ffffff;padding:14px;">Ajuan</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="logout.php" style="color:#ffffff;"><button class="btn btn-primary" type="button">Keluar</button></a></li>
                 </ul>

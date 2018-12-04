@@ -47,10 +47,12 @@
                         <p class="description"></p>
                     </div>
                 </a>
+                    <a href="upload.php">
                     <div class="box"><i class="fa fa-pencil-square icon"></i>
                         <h3 class="name">soal</h3>
                         <p class="description"></p>
                     </div>
+                    </a>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <a href="buku_admin.php">

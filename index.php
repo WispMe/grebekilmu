@@ -33,7 +33,10 @@ if(isset($_POST['submit'])){
 
     // jika query simpan berhasil, maka user sudah terdaftar
     // maka alihkan ke halaman registersukses
-    if($saved) header("Location: index.php");
+    if($saved){
+        header("Location: sukses1.php");
+    } 
+        
 }
 
 if(isset($_POST['login'])){
@@ -89,6 +92,7 @@ if(isset($_POST['login'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="icon" href="">
 </head>
 
 <body style="background-repeat:no-repeat;background-position:top;background-size:auto;background-color:rgb(239,239,239);background-image:url(&quot;assets/img/abc.png&quot;);">
@@ -152,7 +156,7 @@ if(isset($_POST['login'])){
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <p>Peminatan</p><select class="form-control" name="peminatan"><option value="12">Saintek</option><option value="13">Soshum</option></select></div>
+                                                            <p>Peminatan</p><select class="form-control" name="peminatan"><option value="Saintek">Saintek</option><option value="Soshum">Soshum</option></select></div>
                                                         <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Alamat email"></div>
                                                         <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Kata sandi"></div>
                                                         <div class="form-group"><input class="form-control" type="tel" name="nohp" placeholder="Nomor telepon"></div>

@@ -25,23 +25,15 @@
 <body>
     <nav class="navbar navbar-light navbar-expand-md fixed-top visible" data-aos="flip-up" data-aos-delay="900" style="background-color:#72aeda;color:rgb(205,207,208);">
         <div class="container-fluid"><a class="navbar-brand" href="#" style="color:#ffffff;">Grebek<strong>Ilmu</strong></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse justify-content-end" id="navcol-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="masuk1.html" style="color:#ffffff;padding:14px;">Beranda</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="profil.html" style="color:#ffffff;padding:14px;">profil</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="kontak.html" style="color:#ffffff;"><button class="btn btn-primary" type="button">Keluar</button></a></li>
-                </ul>
-        </div>
         </div>
     </nav>
     <div class="newsletter-subscribe">
         <div class="container" style="padding:83px;">
-            <div class="intro" style="padding:37px;">
-                <h2 class="text-center" style="font-size:43px;">Terima Kasih</h2>
-                <p class="text-center" style="font-size:22px;">Pesanan anda sedang diproses, mohon untuk menunggu...</p>
-            </div>
-            <a href="masuk.php" title=""><button class="btn btn-primary" style="padding:18px;margin:-44px;" >Kembali</button></a>
+
+        <h3 class="text-left" style="font-size:43px;">Registrasi Sukses!</h3>
+        <br>
+        <a href="index.php"><button class="btn btn-primary" style="padding:18px;margin:-44px;">Kembali</button></a>
+
         </div>
     </div>
     <div class="social-icons"><a href="#"><i class="icon ion-social-twitter" style="color:rgb(121,160,230);"></i></a><a href="#"><i class="icon ion-social-facebook" style="color:rgb(84,117,201);"></i></a><a href="#"><i class="icon ion-social-snapchat" style="color:rgb(102,146,222);"></i></a>

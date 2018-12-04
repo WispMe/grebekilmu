@@ -88,7 +88,7 @@ if(isset($_GET['id'])) {
             <input class="form-control" type="text" placeholder="Tahun Terbit" name="tahun_terbit">
             <input class="form-control" type="text" placeholder="Jenis" name="jenis">
             <input class="form-control" type="text" placeholder="Quantity" name="quantity">
-            <button class="btn btn-primary" role="button" type="submit" name="submit" href="#">Simpan</button>
+            <button class="btn btn-primary" role="button" type="submit" name="submit">Simpan</button>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

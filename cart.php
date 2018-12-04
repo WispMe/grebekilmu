@@ -158,13 +158,15 @@ if(isset($_GET["id"]) || isset($_GET["index"])){
     <div class="social-icons"><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-youtube"></i></a></div>
     <nav class="navbar navbar-light navbar-expand-md fixed-top visible"
         data-aos="flip-up" data-aos-delay="900" style="background-color:#72aeda;color:rgb(205,207,208);">
-        <div class="container-fluid"><a class="navbar-brand" href="masuk.php" style="color:#ffffff;">Grebek<strong>Ilmu</strong></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-brand" href="#" style="color:#ffffff;">Grebek<strong>Ilmu</strong></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse justify-content-end" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link active" style="color:#ffffff;padding:14px;"><?php echo $_SESSION["user"]["email"] ?></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="profil.html" style="color:#ffffff;padding:14px;">Profil</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color:#ffffff;padding:14px;">Ajuan</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="masuk.php" style="color:#ffffff;padding:14px;">Beranda</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="profil.php" style="color:#ffffff;padding:14px;">Profil</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="soal.php" style="color:#ffffff;padding:14px;">Soal</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cart.php" style="color:#ffffff;padding:14px;">Ajuan</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="logout.php" style="color:#ffffff;"><button class="btn btn-primary" type="button">Keluar</button></a></li>
                 </ul>
         </div>
