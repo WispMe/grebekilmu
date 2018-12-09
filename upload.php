@@ -2,7 +2,7 @@
 require_once("koneksi.php");
 $status = "File belum diupload";
 $file_name = "-";
-$file_size = "0";
+$file_size = "(max 2 MB)";
 
    if(isset($_FILES['file'])){
       $errors= array();

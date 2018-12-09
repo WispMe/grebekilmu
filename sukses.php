@@ -41,7 +41,8 @@
                 <h2 class="text-center" style="font-size:43px;">Terima Kasih</h2>
                 <p class="text-center" style="font-size:22px;">Pesanan anda sedang diproses, mohon untuk menunggu...</p>
             </div>
-            <a href="masuk.php" title=""><button class="btn btn-primary" style="padding:18px;margin:-44px;" >Kembali</button></a>
+            <div style="text-align:center;">
+            <a href="masuk.php" title=""><button class="btn btn-primary" style="padding:18px;margin:-44px;" >Kembali</button></a></div>
         </div>
     </div>
     <div class="social-icons"><a href="#"><i class="icon ion-social-twitter" style="color:rgb(121,160,230);"></i></a><a href="#"><i class="icon ion-social-facebook" style="color:rgb(84,117,201);"></i></a><a href="#"><i class="icon ion-social-snapchat" style="color:rgb(102,146,222);"></i></a>

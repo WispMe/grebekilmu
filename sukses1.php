@@ -30,9 +30,10 @@
     <div class="newsletter-subscribe">
         <div class="container" style="padding:83px;">
 
-        <h3 class="text-left" style="font-size:43px;">Registrasi Sukses!</h3>
+        <h3 class="text-center" style="font-size:43px;">Registrasi Sukses!</h3>
         <br>
-        <a href="index.php"><button class="btn btn-primary" style="padding:18px;margin:-44px;">Kembali</button></a>
+        <div style="text-align:center;">
+        <a href="index.php"><button class="btn btn-primary" style="padding:18px;margin:-44px;">Kembali</button></a></div>
 
         </div>
     </div>
